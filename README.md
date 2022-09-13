@@ -6,6 +6,6 @@ Source : https://www.youtube.com/watch?v=DouXsXlXTXo&list=PLjVLYmrlmjGfh2rwJjrmK
 - Uncomment the required Laravel codes
 - rename it according to blade template
 
-Enjay!
+Enjoy!
 
 
