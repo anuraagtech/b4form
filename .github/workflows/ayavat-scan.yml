@@ -1,0 +1,19 @@
+name: Ayavat Security Scan
+on: [push, pull_request]
+permissions:
+  contents: read
+  security-events: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Ayavat Scan
+        run: |
+          curl -X POST https://scanner-api.ayavat.com/scan \
+            -H "Authorization: Bearer ${{ secrets.AYAVAT_API_KEY }}" \
+            -d '{"repo_url":"${{ github.server_url }}/${{ github.repository }}","ref":"${{ github.ref }}","commit_sha":"${{ github.sha }}"}' \
+            -o results.sarif
+      - uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
